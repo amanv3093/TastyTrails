@@ -8,6 +8,7 @@ import Cart from "./components/pages/Cart/Cart.jsx";
 import PlaceOrder from "./components/pages/PlaceOrder/PlaceOrder.jsx";
 import StoreContextProvider from "./context/StoreContext.jsx";
 import Footer from "./components/footer/Footer.jsx";
+
 let router = createBrowserRouter([
   {
     path: "/",
