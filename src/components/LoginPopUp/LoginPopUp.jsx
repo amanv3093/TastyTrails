@@ -2,7 +2,7 @@ import { useContext, useReducer, useState } from "react";
 import { assets } from "../../assets/assets";
 import "./LoginPopUp.css";
 import { StoreContext } from "../../context/StoreContext";
-import app from "../../firebase/Firebase.js";
+import { db } from "../../firebase/Firebase.js";
 import { useNavigate } from "react-router-dom";
 import {
   getAuth,
@@ -10,6 +10,7 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 
+import { doc, setDoc, getDoc } from "firebase/firestore";
 let SignUpFun = (state, action) => {
   if (action.type === "name") {
     return { ...state, name: action.payload };
@@ -34,9 +35,10 @@ let loginFun = (state, action) => {
 };
 
 function LoginPopUp() {
-  const { setShowLogin } = useContext(StoreContext);
+  const { setShowLogin, setUserId , setUserName} = useContext(StoreContext);
   const [swapLogin, setSwapLogin] = useState(true);
-
+  const { cartItems, setCartItems, setLoginSuccessful } =
+    useContext(StoreContext);
   const auth = getAuth();
   let [signUpDetails, signUpDispatch] = useReducer(SignUpFun, null);
   let [loginDetails, loginDispatch] = useReducer(loginFun, null);
@@ -48,15 +50,42 @@ function LoginPopUp() {
 
     let signUpEmail = signUpDetails.email;
     let signUpPassword = signUpDetails.password;
-    console.log(signUpEmail);
-    console.log(signUpPassword);
+    let name = signUpDetails.name;
+
     try {
       const result = await createUserWithEmailAndPassword(
         auth,
         signUpEmail,
         signUpPassword
       );
-      console.log(result.providerData[0]);
+
+      const data = result.user.providerData[0];
+      console.log(data);
+
+      await setDoc(doc(db, "users", data.uid), {
+        fName: name,
+        data2: cartItems,
+      });
+      setUserId(data.uid);
+      setUserName(name)
+      await signInWithEmailAndPassword(auth, signUpEmail, signUpPassword);
+
+      const userData = result.user.providerData[0];
+      const userDocRef = doc(db, "users", userData.uid);
+      const docSnap = await getDoc(userDocRef);
+
+      if (docSnap.exists()) {
+        const userDataFromFirestore = docSnap.data();
+        console.log(userDataFromFirestore);
+        let data3 = userDataFromFirestore.data2;
+        setCartItems(data3);
+        setLoginSuccessful(true);
+        setShowLogin(false);
+
+        navigate("/");
+      } else {
+        console.log("No such document!");
+      }
     } catch (err) {
       console.log(err);
     }
@@ -72,8 +101,23 @@ function LoginPopUp() {
 
     try {
       const result = await signInWithEmailAndPassword(auth, email, password);
-      setShowLogin(false);
-      navigate("/");
+
+      const userData = result.user.providerData[0];
+      const userDocRef = doc(db, "users", userData.uid);
+      const docSnap = await getDoc(userDocRef);
+      setUserId(userData.uid);
+      setUserName(name)
+      if (docSnap.exists()) {
+        const userDataFromFirestore = docSnap.data();
+        let data3 = userDataFromFirestore.data2;
+        setCartItems(data3);
+        setLoginSuccessful(true);
+        setShowLogin(false);
+
+        navigate("/");
+      } else {
+        console.log("No such document!");
+      }
     } catch (err) {
       console.log(err);
     }

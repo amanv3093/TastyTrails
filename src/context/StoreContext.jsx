@@ -1,19 +1,39 @@
 import { createContext, useState } from "react";
-
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../firebase/Firebase.js";
 export const StoreContext = createContext(null);
 import { food_list } from "../assets/assets";
 const StoreContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
   const [showLogin, setShowLogin] = useState(false);
+  const [loginSuccessful, setLoginSuccessful] = useState(false);
+  const [userId, setUserId] = useState(null);
+  const [userName, setUserName] = useState("");
   const addToCart = (itemId) => {
-    if (!cartItems[itemId]) {
-      setCartItems((prev) => ({ ...prev, [itemId]: 1 }));
+    if (loginSuccessful === false) {
+      setShowLogin(true);
     } else {
-      setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
+      if (!cartItems[itemId]) {
+        setCartItems((prev) => ({ ...prev, [itemId]: 1 }));
+        setDoc(doc(db, "users", userId), {
+          fName: userName,
+          data2: cartItems,
+        });
+      } else {
+        setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
+        setDoc(doc(db, "users", userId), {
+          fName: userName,
+          data2: cartItems,
+        });
+      }
     }
   };
   const removeFromCart = (itemId) => {
     setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
+    setDoc(doc(db, "users", userId), {
+      fName: userName,
+      data2: cartItems,
+    });
   };
 
   const getTotalCartAmount = () => {
@@ -35,6 +55,12 @@ const StoreContextProvider = (props) => {
     getTotalCartAmount,
     showLogin,
     setShowLogin,
+    loginSuccessful,
+    setLoginSuccessful,
+    setUserId,
+    userId,
+    userName,
+    setUserName,
   };
   return (
     <StoreContext.Provider value={contextValue}>
