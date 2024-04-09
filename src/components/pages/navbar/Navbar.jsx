@@ -3,9 +3,9 @@ import { assets } from "../../../assets/assets";
 import { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { StoreContext } from "../../../context/StoreContext";
-function Navbar({ setShowLogin }) {
+function Navbar() {
   const [menu, setMenu] = useState("menu");
-  const { getTotalCartAmount } = useContext(StoreContext);
+  const { getTotalCartAmount ,setShowLogin } = useContext(StoreContext);
   return (
     <div className="navbar">
       <NavLink to="/">

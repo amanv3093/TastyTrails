@@ -58,6 +58,9 @@
   border-radius: 50px;
   background-color: white;
 }
-.food-tem-counter img{
+.food-tem-counter img {
   width: 30px;
+}
+.add2 {
+  cursor: pointer;
 }

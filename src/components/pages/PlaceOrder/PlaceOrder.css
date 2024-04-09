@@ -34,3 +34,9 @@
 .place-order .cart-total button {
   margin-top: 30px;
 }
+
+@media screen and (max-width: 425px) {
+  .place-order {
+    flex-wrap: wrap;
+  }
+}

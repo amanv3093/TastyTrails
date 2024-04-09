@@ -1,9 +1,10 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 
 export const StoreContext = createContext(null);
 import { food_list } from "../assets/assets";
 const StoreContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
+  const [showLogin, setShowLogin] = useState(false);
   const addToCart = (itemId) => {
     if (!cartItems[itemId]) {
       setCartItems((prev) => ({ ...prev, [itemId]: 1 }));
@@ -32,6 +33,8 @@ const StoreContextProvider = (props) => {
     addToCart,
     removeFromCart,
     getTotalCartAmount,
+    showLogin,
+    setShowLogin,
   };
   return (
     <StoreContext.Provider value={contextValue}>
