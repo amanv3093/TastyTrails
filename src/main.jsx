@@ -8,6 +8,7 @@ import Cart from "./components/pages/Cart/Cart.jsx";
 import PlaceOrder from "./components/pages/PlaceOrder/PlaceOrder.jsx";
 import StoreContextProvider from "./context/StoreContext.jsx";
 import Footer from "./components/footer/Footer.jsx";
+import Search from "./components/pages/search/Search.jsx";
 
 let router = createBrowserRouter([
   {
@@ -17,6 +18,7 @@ let router = createBrowserRouter([
       { path: "/", Component: Home },
       { path: "/cart", Component: Cart },
       { path: "/order", Component: PlaceOrder },
+      { path: "/search", Component: Search },
     ],
   },
 ]);

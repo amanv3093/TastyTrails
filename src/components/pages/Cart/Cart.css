@@ -81,6 +81,34 @@
   border-radius: 4px;
   cursor: pointer;
 }
+.empty-cart {
+  width: 100%;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.empty-cart img {
+  width: 275px;
+  height: 259px;
+}
+.empty-cart p {
+  font-size: 18px;
+  font-weight: 600;
+  color: #484646;
+  padding: 15px 0px;
+}
+.empty-cart button {
+  border: none;
+  background-color: tomato;
+  padding: 10px 20px;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 4px;
+  margin-top: 10px;
+}
 @media screen and (max-width: 750px) {
   .cart-bottom {
     flex-direction: column-reverse;

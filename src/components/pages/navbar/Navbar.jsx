@@ -16,11 +16,13 @@ import { getAuth, signOut } from "firebase/auth";
 // import { db } from "../../../firebase/Firebase.js";
 function Navbar() {
   const [menu, setMenu] = useState("menu");
+  const [showMenu, setShowMenu] = useState(0);
   const {
     getTotalCartAmount,
     setShowLogin,
     loginSuccessful,
     setLoginSuccessful,
+    userName,
   } = useContext(StoreContext);
 
   const auth = getAuth();
@@ -33,6 +35,11 @@ function Navbar() {
       alert(err.message);
     }
   }
+
+  let isVisible = () => {
+    setShowMenu((e) => !e);
+  };
+  console.log(userName);
   return (
     <div className="navbar" id="navbar">
       <NavLink to="/">
@@ -70,7 +77,10 @@ function Navbar() {
         </a>
       </ul>
       <div className="navbar-right">
-        <img src={assets.search_icon} />
+        <NavLink style={{ textDecoration: "none" }} to="/search">
+          <img src={assets.search_icon} />
+        </NavLink>
+
         <div className="navbar-search-icon">
           <NavLink to="/cart">
             <img src={assets.basket_icon} />
@@ -80,7 +90,17 @@ function Navbar() {
         {loginSuccessful === false ? (
           <button onClick={() => setShowLogin(true)}>sign in</button>
         ) : (
-          <button onClick={() => SignOut()}>Logout</button>
+          <div className="menu-box">
+            <i onClick={() => isVisible()} class="fa-solid fa-user menu"></i>
+
+            <ul
+              style={{ display: showMenu === true ? "block" : "none" }}
+              className="menu-ListBox"
+            >
+              <li>Hi, {userName.slice(0, 20)}</li>
+              <li onClick={() => SignOut()}>SignOut</li>
+            </ul>
+          </div>
         )}
       </div>
     </div>

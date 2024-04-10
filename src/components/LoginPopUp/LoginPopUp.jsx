@@ -35,10 +35,16 @@ let loginFun = (state, action) => {
 };
 
 function LoginPopUp() {
-  const { setShowLogin, setUserId , setUserName} = useContext(StoreContext);
+  const {
+    setShowLogin,
+    setUserId,
+    setUserName,
+    cartItems,
+    setCartItems,
+    setLoginSuccessful,
+  } = useContext(StoreContext);
   const [swapLogin, setSwapLogin] = useState(true);
-  const { cartItems, setCartItems, setLoginSuccessful } =
-    useContext(StoreContext);
+
   const auth = getAuth();
   let [signUpDetails, signUpDispatch] = useReducer(SignUpFun, null);
   let [loginDetails, loginDispatch] = useReducer(loginFun, null);
@@ -66,8 +72,9 @@ function LoginPopUp() {
         fName: name,
         data2: cartItems,
       });
+      
       setUserId(data.uid);
-      setUserName(name)
+      setUserName(name);
       await signInWithEmailAndPassword(auth, signUpEmail, signUpPassword);
 
       const userData = result.user.providerData[0];
@@ -106,7 +113,7 @@ function LoginPopUp() {
       const userDocRef = doc(db, "users", userData.uid);
       const docSnap = await getDoc(userDocRef);
       setUserId(userData.uid);
-      setUserName(name)
+
       if (docSnap.exists()) {
         const userDataFromFirestore = docSnap.data();
         let data3 = userDataFromFirestore.data2;
@@ -114,6 +121,7 @@ function LoginPopUp() {
         setLoginSuccessful(true);
         setShowLogin(false);
 
+        setUserName(userDataFromFirestore.fName);
         navigate("/");
       } else {
         console.log("No such document!");
@@ -125,7 +133,7 @@ function LoginPopUp() {
   /***************************      End      **********************************/
 
   return (
-    <div className="login-popUp">
+    <div className="login-popUp" id="login-popUp">
       <form className="login-popup-container">
         <div className="login-popup-title">
           <h2>{swapLogin ? "Login" : "SignUp"}</h2>
