@@ -66,6 +66,7 @@ const StoreContextProvider = (props) => {
       theme: "dark",
     });
   };
+  
   const contextValue = {
     food_list,
     cartItems,

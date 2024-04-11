@@ -5,8 +5,7 @@ function Footer() {
     <div className="footer" id="footer">
       <div className="footer-content">
         <div className="footer-content-left">
-          <img src={assets.logo} />
-          <p>jffbfnmfmf</p>
+          <h1 className="Heading1">TastyTrails</h1>
           <div className="footer-social-icons">
             <img src={assets.facebook_icon} />
             <img src={assets.twitter_icon} />
@@ -26,13 +25,13 @@ function Footer() {
           <h2>GET IN TOUCH</h2>
           <ul>
             <li>+1-222-464-669</li>
-            <li>contact@tomato.com</li>
+            <li>contact@TastyTrails.com</li>
           </ul>
         </div>
       </div>
       <hr />
       <p className="footer-copyright">
-        Copyright 2024 © Tomato.com - All Right Reserved.
+        Copyright 2024 © TastyTrails.com - All Right Reserved.
       </p>
     </div>
   );

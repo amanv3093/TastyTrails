@@ -1,8 +1,21 @@
-# React + Vite
+# TastyTrails Food Delivery Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+TastyTrails is a food delivery website designed to offer users a convenient way to order food from various categories. This project includes features such as browsing food categories, adding items to a cart, searching for specific items, and user authentication using Firebase.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Browse different food categories
+- Add items to the cart
+- Search for specific food items
+- User authentication with Firebase
+- Firebase Realtime Database integration for storing user and order information
+
+## Technologies Used
+
+- HTML, CSS, JavaScript & ReactJS
+- Firebase Authentication
+- Firebase Realtime Database
+
+## HostedLink
+
+- [tasty-trails-phi.vercel.app]

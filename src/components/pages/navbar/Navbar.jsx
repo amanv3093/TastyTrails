@@ -50,7 +50,7 @@ function Navbar() {
     <div className="navbar" id="navbar">
       <ToastContainer />
       <NavLink to="/">
-        <img src={assets.logo} alt="logo" className="logo" />
+        <h1 className="Heading1">TastyTrails</h1>
       </NavLink>
       <ul className="navbar-menu">
         <NavLink
@@ -59,28 +59,28 @@ function Navbar() {
           onClick={() => setMenu("home")}
           className={menu === "home" ? "active" : ""}
         >
-          home
+          Home
         </NavLink>
         <a
           href="#explore-menu"
           onClick={() => setMenu("menu")}
           className={menu === "menu" ? "active" : ""}
         >
-          menu
+          Menu
         </a>
         <a
           href="#app-download"
           onClick={() => setMenu("mobile-app")}
           className={menu === "mobile-app" ? "active" : ""}
         >
-          mobile-app
+          Mobile-app
         </a>
         <a
           href="#footer"
           onClick={() => setMenu("contact-us")}
           className={menu === "contact-us" ? "active" : ""}
         >
-          contact us
+          Contact us
         </a>
       </ul>
       <div className="navbar-right">
