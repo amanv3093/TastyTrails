@@ -13,6 +13,8 @@ import { StoreContext } from "../../../context/StoreContext";
 //   updateDoc,
 // } from "firebase/firestore";
 import { getAuth, signOut } from "firebase/auth";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 // import { db } from "../../../firebase/Firebase.js";
 function Navbar() {
   const [menu, setMenu] = useState("menu");
@@ -23,12 +25,16 @@ function Navbar() {
     loginSuccessful,
     setLoginSuccessful,
     userName,
+    notification,
   } = useContext(StoreContext);
 
   const auth = getAuth();
+
   async function SignOut() {
     try {
       await signOut(auth);
+      notification("Sign out.");
+
       setLoginSuccessful(false);
     } catch (err) {
       console.log(err);
@@ -42,6 +48,7 @@ function Navbar() {
   console.log(userName);
   return (
     <div className="navbar" id="navbar">
+      <ToastContainer />
       <NavLink to="/">
         <img src={assets.logo} alt="logo" className="logo" />
       </NavLink>

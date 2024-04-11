@@ -3,12 +3,15 @@ import { doc, setDoc } from "firebase/firestore";
 import { db } from "../firebase/Firebase.js";
 export const StoreContext = createContext(null);
 import { food_list } from "../assets/assets";
+import { toast } from "react-toastify";
+
 const StoreContextProvider = (props) => {
   const [cartItems, setCartItems] = useState({});
   const [showLogin, setShowLogin] = useState(false);
   const [loginSuccessful, setLoginSuccessful] = useState(false);
   const [userId, setUserId] = useState(null);
   const [userName, setUserName] = useState("");
+  let [promoApply, setPromoApply] = useState(false);
   const addToCart = (itemId) => {
     if (loginSuccessful === false) {
       setShowLogin(true);
@@ -36,15 +39,32 @@ const StoreContextProvider = (props) => {
     });
   };
 
-  const getTotalCartAmount = () => {
-    let totalAmount = 0;
-    for (const item in cartItems) {
-      if (cartItems[item] > 0) {
-        let itemInfo = food_list.find((product) => product._id === item);
-        totalAmount += itemInfo.price * cartItems[item];
+  const getTotalCartAmount = (promo, e) => {
+    if (promo === "promo") {
+      return e;
+    } else {
+      let totalAmount = 0;
+      for (const item in cartItems) {
+        if (cartItems[item] > 0) {
+          let itemInfo = food_list.find((product) => product._id === item);
+          totalAmount += itemInfo.price * cartItems[item];
+        }
       }
+      return totalAmount;
     }
-    return totalAmount;
+  };
+  const notification = (e) => {
+    console.log(e);
+    toast(e, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
   };
   const contextValue = {
     food_list,
@@ -61,6 +81,9 @@ const StoreContextProvider = (props) => {
     userId,
     userName,
     setUserName,
+    promoApply,
+    setPromoApply,
+    notification,
   };
   return (
     <StoreContext.Provider value={contextValue}>

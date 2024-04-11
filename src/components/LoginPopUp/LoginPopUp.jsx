@@ -11,6 +11,7 @@ import {
 } from "firebase/auth";
 
 import { doc, setDoc, getDoc } from "firebase/firestore";
+
 let SignUpFun = (state, action) => {
   if (action.type === "name") {
     return { ...state, name: action.payload };
@@ -42,6 +43,7 @@ function LoginPopUp() {
     cartItems,
     setCartItems,
     setLoginSuccessful,
+    notification,
   } = useContext(StoreContext);
   const [swapLogin, setSwapLogin] = useState(true);
 
@@ -64,6 +66,7 @@ function LoginPopUp() {
         signUpEmail,
         signUpPassword
       );
+      notification("Sign-up completed successfully.");
 
       const data = result.user.providerData[0];
       console.log(data);
@@ -72,7 +75,7 @@ function LoginPopUp() {
         fName: name,
         data2: cartItems,
       });
-      
+
       setUserId(data.uid);
       setUserName(name);
       await signInWithEmailAndPassword(auth, signUpEmail, signUpPassword);
@@ -108,6 +111,7 @@ function LoginPopUp() {
 
     try {
       const result = await signInWithEmailAndPassword(auth, email, password);
+      notification("You have successfully signed in.");
 
       const userData = result.user.providerData[0];
       const userDocRef = doc(db, "users", userData.uid);
@@ -134,7 +138,10 @@ function LoginPopUp() {
 
   return (
     <div className="login-popUp" id="login-popUp">
-      <form className="login-popup-container">
+      <form
+        className="login-popup-container"
+        onSubmit={swapLogin === true ? loginBtnFun : SignUpBtnFun}
+      >
         <div className="login-popup-title">
           <h2>{swapLogin ? "Login" : "SignUp"}</h2>
           <img onClick={() => setShowLogin(false)} src={assets.cross_icon} />
@@ -180,7 +187,10 @@ function LoginPopUp() {
               />
               <input
                 onChange={(e) =>
-                  signUpDispatch({ type: "password", payload: e.target.value })
+                  signUpDispatch({
+                    type: "password",
+                    payload: e.target.value,
+                  })
                 }
                 type="password"
                 placeholder="Password"
@@ -190,9 +200,9 @@ function LoginPopUp() {
           )}
         </div>
         {swapLogin ? (
-          <button onClick={(e) => loginBtnFun(e)}>Login</button>
+          <button type="submit">Login</button>
         ) : (
-          <button onClick={(e) => SignUpBtnFun(e)}>SignUp</button>
+          <button type="submit">SignUp</button>
         )}
 
         <div className="login-popup-condition">
