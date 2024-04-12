@@ -12,6 +12,7 @@ const StoreContextProvider = (props) => {
   const [userId, setUserId] = useState(null);
   const [userName, setUserName] = useState("");
   let [promoApply, setPromoApply] = useState(false);
+  let [category, setCategory] = useState("All");
   const addToCart = (itemId) => {
     if (loginSuccessful === false) {
       setShowLogin(true);
@@ -66,7 +67,7 @@ const StoreContextProvider = (props) => {
       theme: "dark",
     });
   };
-  
+
   const contextValue = {
     food_list,
     cartItems,
@@ -85,6 +86,8 @@ const StoreContextProvider = (props) => {
     promoApply,
     setPromoApply,
     notification,
+    category,
+    setCategory,
   };
   return (
     <StoreContext.Provider value={contextValue}>

@@ -1,5 +1,7 @@
+import { NavLink } from "react-router-dom";
 import { assets } from "../../assets/assets";
 import "./Footer.css";
+
 function Footer() {
   return (
     <div className="footer" id="footer">
@@ -7,18 +9,28 @@ function Footer() {
         <div className="footer-content-left">
           <h1 className="Heading1">TastyTrails</h1>
           <div className="footer-social-icons">
-            <img src={assets.facebook_icon} />
-            <img src={assets.twitter_icon} />
-            <img src={assets.linkedin_icon} />
+            <img src={assets.facebook_icon} alt="Facebook Icon" />
+            <img src={assets.twitter_icon} alt="Twitter Icon" />
+            <img src={assets.linkedin_icon} alt="LinkedIn Icon" />
           </div>
         </div>
         <div className="footer-content-center">
           <h2>COMPANY</h2>
           <ul>
-            <li>Home</li>
-            <li>About us</li>
-            <li>Delivery</li>
-            <li>Privacy policy</li>
+            <li>
+              <NavLink>Home</NavLink>
+            </li>
+            <li>
+              <NavLink>About us</NavLink>
+            </li>
+            <li>
+              <NavLink href="#food-display">Delivery</NavLink>
+            </li>
+            <li>
+              <NavLink to="/privacyPolicy" href="#navbar">
+                Privacy policy
+              </NavLink>
+            </li>
           </ul>
         </div>
         <div className="footer-content-right">

@@ -7,8 +7,9 @@ import Home from "./components/pages/Home/Home.jsx";
 import Cart from "./components/pages/Cart/Cart.jsx";
 import PlaceOrder from "./components/pages/PlaceOrder/PlaceOrder.jsx";
 import StoreContextProvider from "./context/StoreContext.jsx";
-import Footer from "./components/footer/Footer.jsx";
+
 import Search from "./components/pages/search/Search.jsx";
+import PrivacyPolicy from "./components/pages/PrivacyPolicy/PrivacyPolicy.jsx";
 
 let router = createBrowserRouter([
   {
@@ -19,14 +20,12 @@ let router = createBrowserRouter([
       { path: "/cart", Component: Cart },
       { path: "/order", Component: PlaceOrder },
       { path: "/search", Component: Search },
+      { path: "/PrivacyPolicy", Component: PrivacyPolicy },
     ],
   },
 ]);
 ReactDOM.createRoot(document.getElementById("root")).render(
   <StoreContextProvider>
-    <RouterProvider router={router} />
-    <Outlet />
-
-    <Footer />
+    <RouterProvider router={router}></RouterProvider>
   </StoreContextProvider>
 );

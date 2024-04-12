@@ -1,0 +1,14 @@
+.PrivacyPolicy p {
+  font-weight: 300;
+}
+.PrivacyPolicy h3 {
+  font-weight: 400;
+  padding: 10px 0px;
+}
+.PrivacyPolicy ul {
+}
+.PrivacyPolicy ul li {
+  list-style: none;
+  margin-left: 32px;
+  padding-top: 5px;
+}

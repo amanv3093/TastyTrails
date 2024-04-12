@@ -1,7 +1,10 @@
 import "./ExploreMenu.css";
 import { menu_list } from "../../assets/assets";
-function ExploreMenu({ category, setCategory }) {
-  console.log(category);
+import { useContext } from "react";
+import { StoreContext } from "../../context/StoreContext";
+function ExploreMenu() {
+  const { category, setCategory } = useContext(StoreContext);
+  console.log("category", category);
   return (
     <div className="explore-menu" id="explore-menu">
       <h1>Explore our menu</h1>
