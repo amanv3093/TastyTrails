@@ -127,6 +127,19 @@
   color: tomato;
   cursor: pointer;
 }
+@media screen and (max-width: 320px) {
+  .Heading1 {
+    font-size: 18px;
+  }
+  .navbar-right {
+    gap: 10px;
+  }
+}
+@media screen and (min-width: 321px) and (max-width: 425px) {
+  .Heading1 {
+    font-size: 22px;
+  }
+}
 @media screen and (max-width: 1024px) {
   .menu {
     font-size: 20px;

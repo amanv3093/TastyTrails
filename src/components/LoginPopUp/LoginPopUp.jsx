@@ -97,6 +97,7 @@ function LoginPopUp() {
         console.log("No such document!");
       }
     } catch (err) {
+      alert(err);
       console.log(err);
     }
   };
@@ -132,6 +133,7 @@ function LoginPopUp() {
       }
     } catch (err) {
       console.log(err);
+      alert(err);
     }
   };
   /***************************      End      **********************************/
