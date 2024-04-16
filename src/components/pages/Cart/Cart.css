@@ -121,6 +121,15 @@
   padding: 4px;
   margin-left: 5px;
 }
+.expand-box {
+  width: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.expand-box span {
+  cursor: pointer;
+}
 @media screen and (max-width: 750px) {
   .cart-bottom {
     flex-direction: column-reverse;

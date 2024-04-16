@@ -17,7 +17,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // import { db } from "../../../firebase/Firebase.js";
 function Navbar() {
-  const [menu, setMenu] = useState("menu");
+  const [menu, setMenu] = useState("home");
   const [showMenu, setShowMenu] = useState(0);
   const {
     getTotalCartAmount,
@@ -47,70 +47,73 @@ function Navbar() {
   };
   console.log(userName);
   return (
-    <div className="navbar" id="navbar">
+    <>
       <ToastContainer />
-      <NavLink to="/">
-        <h1 className="Heading1">TastyTrails</h1>
-      </NavLink>
-      <ul className="navbar-menu">
-        <NavLink
-          style={{ textDecoration: "none" }}
-          to="/"
-          onClick={() => setMenu("home")}
-          className={menu === "home" ? "active" : ""}
-        >
-          Home
-        </NavLink>
-        <a
-          href="#explore-menu"
-          onClick={() => setMenu("menu")}
-          className={menu === "menu" ? "active" : ""}
-        >
-          Menu
-        </a>
-        <a
-          href="#app-download"
-          onClick={() => setMenu("mobile-app")}
-          className={menu === "mobile-app" ? "active" : ""}
-        >
-          Mobile-app
-        </a>
-        <a
-          href="#footer"
-          onClick={() => setMenu("contact-us")}
-          className={menu === "contact-us" ? "active" : ""}
-        >
-          Contact us
-        </a>
-      </ul>
-      <div className="navbar-right">
-        <NavLink style={{ textDecoration: "none" }} to="/search">
-          <img src={assets.search_icon} />
-        </NavLink>
 
-        <div className="navbar-search-icon">
-          <NavLink to="/cart">
-            <img src={assets.basket_icon} />
+      <div className="navbar" id="navbar">
+        <NavLink to="/" style={{ border: "none" }}>
+          <h1 className="Heading1">TastyTrails</h1>
+        </NavLink>
+        <ul className="navbar-menu">
+          <NavLink
+            style={{ textDecoration: "none" }}
+            to="/"
+            onClick={() => setMenu("home")}
+            className={menu === "home" ? "active2" : ""}
+          >
+            Home
           </NavLink>
-          <div className={getTotalCartAmount() === 0 ? "" : "dot"}></div>
-        </div>
-        {loginSuccessful === false ? (
-          <button onClick={() => setShowLogin(true)}>sign in</button>
-        ) : (
-          <div className="menu-box">
-            <i onClick={() => isVisible()} class="fa-solid fa-user menu"></i>
+          <a
+            href="#explore-menu"
+            onClick={() => setMenu("menu")}
+            className={menu === "menu" ? "active2" : ""}
+          >
+            Menu
+          </a>
+          <a
+            href="#app-download"
+            onClick={() => setMenu("mobile-app")}
+            className={menu === "mobile-app" ? "active2" : ""}
+          >
+            Mobile-app
+          </a>
+          <a
+            href="#footer"
+            onClick={() => setMenu("contact-us")}
+            className={menu === "contact-us" ? "active2" : ""}
+          >
+            Contact us
+          </a>
+        </ul>
+        <div className="navbar-right">
+          <NavLink style={{ textDecoration: "none" }} to="/search">
+            <img src={assets.search_icon} />
+          </NavLink>
 
-            <ul
-              style={{ display: showMenu === true ? "block" : "none" }}
-              className="menu-ListBox"
-            >
-              <li>Hi, {userName.slice(0, 20)}</li>
-              <li onClick={() => SignOut()}>SignOut</li>
-            </ul>
+          <div className="navbar-search-icon">
+            <NavLink to="/cart">
+              <img src={assets.basket_icon} />
+            </NavLink>
+            <div className={getTotalCartAmount() === 0 ? "" : "dot"}></div>
           </div>
-        )}
+          {loginSuccessful === false ? (
+            <button onClick={() => setShowLogin(true)}>sign in</button>
+          ) : (
+            <div className="menu-box">
+              <i onClick={() => isVisible()} class="fa-solid fa-user menu"></i>
+
+              <ul
+                style={{ display: showMenu === true ? "block" : "none" }}
+                className="menu-ListBox"
+              >
+                <li>Hi, {userName.slice(0, 20)}</li>
+                <li onClick={() => SignOut()}>SignOut</li>
+              </ul>
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

@@ -10,6 +10,7 @@ import StoreContextProvider from "./context/StoreContext.jsx";
 
 import Search from "./components/pages/search/Search.jsx";
 import PrivacyPolicy from "./components/pages/PrivacyPolicy/PrivacyPolicy.jsx";
+import OrderSuccessful from "./components/pages/OrderSuccessful/OrderSuccessful.jsx";
 
 let router = createBrowserRouter([
   {
@@ -21,6 +22,7 @@ let router = createBrowserRouter([
       { path: "/order", Component: PlaceOrder },
       { path: "/search", Component: Search },
       { path: "/PrivacyPolicy", Component: PrivacyPolicy },
+      { path: "/OrderSuccessful", Component: OrderSuccessful },
     ],
   },
 ]);

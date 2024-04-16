@@ -13,6 +13,7 @@ const StoreContextProvider = (props) => {
   const [userName, setUserName] = useState("");
   let [promoApply, setPromoApply] = useState(false);
   let [category, setCategory] = useState("All");
+  console.log(cartItems);
   const addToCart = (itemId) => {
     if (loginSuccessful === false) {
       setShowLogin(true);
@@ -32,12 +33,17 @@ const StoreContextProvider = (props) => {
       }
     }
   };
+
   const removeFromCart = (itemId) => {
     setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
     setDoc(doc(db, "users", userId), {
       fName: userName,
       data2: cartItems,
     });
+  };
+
+  const allItemRemove = (itemId) => {
+    setCartItems((prev) => ({ ...prev, [itemId]: 0 }));
   };
 
   const getTotalCartAmount = (promo, e) => {
@@ -58,7 +64,7 @@ const StoreContextProvider = (props) => {
     console.log(e);
     toast(e, {
       position: "top-right",
-      autoClose: 5000,
+      autoClose: 2000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -88,6 +94,7 @@ const StoreContextProvider = (props) => {
     notification,
     category,
     setCategory,
+    allItemRemove,
   };
   return (
     <StoreContext.Provider value={contextValue}>

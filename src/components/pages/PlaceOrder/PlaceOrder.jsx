@@ -1,18 +1,23 @@
 import { useContext } from "react";
 import "./PlaceOrder.css";
 import { StoreContext } from "../../../context/StoreContext";
+import { useNavigate } from "react-router-dom";
 
 function PlaceOrder() {
   const { getTotalCartAmount, promoApply } = useContext(StoreContext);
+  let navigate = useNavigate();
+  let successfullOrderFun = () => {
+    navigate("/OrderSuccessful");
+  };
   return (
-    <form className="place-order">
+    <form className="place-order" onSubmit={successfullOrderFun}>
       <div className="place-order-left">
         <p className="title">Delivery Information</p>
         <div className="multi-fields">
           <input type="text" placeholder="First name" required />
           <input type="text" placeholder="Last name" required />
         </div>
-        <input type="text" placeholder="Email address" required />
+        {/* <input type="text" placeholder="Email address" required /> */}
         <input type="text" placeholder="Street" required />
         <div className="multi-fields">
           <input type="text" placeholder="City" required />
@@ -61,7 +66,8 @@ function PlaceOrder() {
               </b>
             </div>
           </div>
-          <button>PROCEED TO PAYMENT</button>
+
+          <button type="submit">PROCEED TO PAYMENT</button>
         </div>
       </div>
     </form>

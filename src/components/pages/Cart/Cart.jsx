@@ -14,6 +14,8 @@ const Cart = () => {
     promoApply,
     setPromoApply,
     notification,
+    addToCart,
+    allItemRemove,
   } = useContext(StoreContext);
   const navigate = useNavigate();
   console.log(food_list);
@@ -61,7 +63,7 @@ const Cart = () => {
     }
   }, [cartItems, getTotalCartAmount()]);
 
-  console.log(getTotalCartAmount());
+  console.log(food_list);
   return (
     <>
       {check > 0 ? (
@@ -84,10 +86,25 @@ const Cart = () => {
                     <img src={item.image} />
                     <p>{item.name}</p>
                     <p>${item.price}</p>
-                    <p>{cartItems[item._id]}</p>
+                    <div className="expand-box">
+                      <span
+                        onClick={() => addToCart(item._id)}
+                        class="material-symbols-outlined"
+                      >
+                        expand_less
+                      </span>
+                      <p>{cartItems[item._id]}</p>
+                      <span
+                        onClick={() => removeFromCart(item._id)}
+                        class="material-symbols-outlined"
+                      >
+                        expand_more
+                      </span>
+                    </div>
+
                     <p>${item.price * cartItems[item._id]}</p>
                     <p
-                      onClick={() => removeFromCart(item._id)}
+                      onClick={() => allItemRemove(item._id)}
                       className="cross"
                     >
                       x
@@ -140,7 +157,6 @@ const Cart = () => {
                   />
                   <button onClick={() => promoFun()}>Submit</button>
                 </div>
-                
               </div>
             </div>
           </div>
