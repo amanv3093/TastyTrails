@@ -59,28 +59,19 @@ function Navbar() {
             style={{ textDecoration: "none" }}
             to="/"
             onClick={() => setMenu("home")}
-            className={menu === "home" ? "active2" : ""}
           >
             Home
           </NavLink>
-          <a
-            href="#explore-menu"
-            onClick={() => setMenu("menu")}
-            className={menu === "menu" ? "active2" : ""}
-          >
+          <a href="#explore-menu" onClick={() => setMenu("menu")}>
             Menu
           </a>
-          <a
-            href="#app-download"
-            onClick={() => setMenu("mobile-app")}
-            className={menu === "mobile-app" ? "active2" : ""}
-          >
+          <a href="#app-download" onClick={() => setMenu("mobile-app")}>
             Mobile-app
           </a>
           <a
             href="#footer"
             onClick={() => setMenu("contact-us")}
-            className={menu === "contact-us" ? "active2" : ""}
+            // className={menu === "contact-us" ? "active2" : ""}
           >
             Contact us
           </a>

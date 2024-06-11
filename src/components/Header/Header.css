@@ -1,9 +1,17 @@
 .header {
   height: 34vw;
   margin: 30px auto;
-  background: url("/public/header_img.png");
+  /* background: url("/public/header_img.png"); */
   background-size: cover;
   position: relative;
+}
+.header-background-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 .header-contents {
   position: absolute;
