@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import "./Header.css";
 import { Skeleton } from "@mui/material";
-
+import bannerImg from "../../assets/header_img.png";
 function Header() {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
@@ -25,7 +25,7 @@ function Header() {
         />
       )}
       <img
-        src="/public/header_img.png"
+        src={bannerImg}
         alt="Header Background"
         onLoad={handleImageLoad}
         onError={handleImageError}
