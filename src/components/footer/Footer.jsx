@@ -9,9 +9,19 @@ function Footer() {
         <div className="footer-content-left">
           <h1 className="Heading1">TastyTrails</h1>
           <div className="footer-social-icons">
-            <img src={assets.facebook_icon} alt="Facebook Icon" />
-            <img src={assets.twitter_icon} alt="Twitter Icon" />
-            <img src={assets.linkedin_icon} alt="LinkedIn Icon" />
+            <a
+              href="https://www.linkedin.com/in/aman-verma-180a04243/"
+              target="_blank"
+            >
+              <img src={assets.linkedin_icon} alt="LinkedIn Icon" />
+            </a>
+            <a href="https://x.com/Amanver59327311" target="_blank">
+              <img src={assets.twitter_icon} alt="Twitter Icon" />
+            </a>
+
+            <a href="#">
+              <img src={assets.facebook_icon} alt="Facebook Icon" />
+            </a>
           </div>
         </div>
         <div className="footer-content-center">
