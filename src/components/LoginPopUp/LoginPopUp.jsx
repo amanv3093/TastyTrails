@@ -12,6 +12,11 @@ import {
 
 import { doc, setDoc, getDoc } from "firebase/firestore";
 
+function validateEmail(email) {
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return re.test(email);
+}
+
 let SignUpFun = (state, action) => {
   if (action.type === "name") {
     return { ...state, name: action.payload };
@@ -25,7 +30,6 @@ let SignUpFun = (state, action) => {
 };
 
 let loginFun = (state, action) => {
-  console.log(action.type);
   if (action.type === "email") {
     return { ...state, email: action.payload };
   } else if (action.type === "password") {
@@ -46,19 +50,35 @@ function LoginPopUp() {
     notification,
   } = useContext(StoreContext);
   const [swapLogin, setSwapLogin] = useState(true);
+  const [emailError, setEmailError] = useState("");
 
   const auth = getAuth();
-  let [signUpDetails, signUpDispatch] = useReducer(SignUpFun, null);
-  let [loginDetails, loginDispatch] = useReducer(loginFun, null);
+  let [signUpDetails, signUpDispatch] = useReducer(SignUpFun, {
+    name: "",
+    email: "",
+    password: "",
+  });
+  let [loginDetails, loginDispatch] = useReducer(loginFun, {
+    email: "",
+    password: "",
+  });
 
   let navigate = useNavigate();
-  /****************  createUserWithEmailAndPassword *******************/
+
   let SignUpBtnFun = async (e) => {
     e.preventDefault();
 
     let signUpEmail = signUpDetails.email;
     let signUpPassword = signUpDetails.password;
     let name = signUpDetails.name;
+
+    // Validate email
+    if (!validateEmail(signUpEmail)) {
+      setEmailError("Please enter a valid email address.");
+      return;
+    } else {
+      setEmailError("");
+    }
 
     try {
       const result = await createUserWithEmailAndPassword(
@@ -101,14 +121,19 @@ function LoginPopUp() {
       console.log(err);
     }
   };
-  /***************************      End      **********************************/
 
-  /****************  LoginWithEmailAndPassword *******************/
   let loginBtnFun = async (e) => {
     e.preventDefault();
-    console.log(loginDetails);
+
     let email = loginDetails.email;
     let password = loginDetails.password;
+
+    if (!validateEmail(email)) {
+      setEmailError("Please enter a valid email address.");
+      return;
+    } else {
+      setEmailError("");
+    }
 
     try {
       const result = await signInWithEmailAndPassword(auth, email, password);
@@ -136,7 +161,6 @@ function LoginPopUp() {
       alert(err);
     }
   };
-  /***************************      End      **********************************/
 
   return (
     <div className="login-popUp" id="login-popUp">
@@ -201,6 +225,7 @@ function LoginPopUp() {
             </>
           )}
         </div>
+        {emailError && <p className="error-message">{emailError}</p>}
         {swapLogin ? (
           <button type="submit">Login</button>
         ) : (
