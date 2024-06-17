@@ -37,7 +37,9 @@ function Navbar() {
 
       setLoginSuccessful(false);
       window.location.href = "/";
-      window.location.reload();
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     } catch (err) {
       console.log(err);
       alert(err.message);
