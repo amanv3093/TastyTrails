@@ -36,6 +36,7 @@ function Navbar() {
       notification("Sign out.");
 
       setLoginSuccessful(false);
+      window.location.href = "/";
       window.location.reload();
     } catch (err) {
       console.log(err);
